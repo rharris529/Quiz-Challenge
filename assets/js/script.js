@@ -3,12 +3,16 @@ var quizNum = document.getElementById("question-number");
 var quizQuestion = document.getElementById("content");
 var quiztimer = document.getElementById("quiz-timer");
 var timeLeft = 50;
+var listEl = document.createAttribute("li");
+var score = document.getElementById("your-Score");
+var saveInitial = document.getElementById("save-score");
 
 var button1 = document.getElementById("answer1");
 var button2 = document.getElementById("answer2");
 var button3 = document.getElementById("answer3");
 var button4 = document.getElementById("answer4");
 
+// question answers are represented as arrays, to be called later
 var questionOne = ["Triforce of Power", "Triforce of Wisdom", "Triforce of Courage", "Triforce of Strength"];
 var questionTwo = ["Epona", "Agro", "Seabiscuit", "Shadowmere"];
 var questionThree = ["A + L + R + Start", "A, B, A, C, A, B, B", "Down, Forward + Punch", "Up, Up, Down, Down, Left, Right, Left, Right, B, A"];
@@ -26,17 +30,19 @@ function countdown () {
         } else if (timeLeft === -1) {
             // when quizStart function ends, user will be transported to highscores page
             clearInterval(timeLeft);
-            postHighScores();
+            endGame();
         }
         if (quiz5 === true) {
-            postHighScores();
+            endGame();
         }
         return false;
     }, 1000);      
 };
 
+// Each quiz question will represented as its own function, user cannot proceed to next question without giving an answer to the preceding question
 var quiz1 = function() {
 
+    // These values are inserted into corresponding HTML once the pages/function loads
     quizNum.innerHTML = "Question #1:";
     quizQuestion.innerHTML = "Link, from Legend of Zelda, bears the Triforce of which power?";
     button1.innerHTML = questionOne[0];
@@ -44,18 +50,23 @@ var quiz1 = function() {
     button3.innerHTML = questionOne[2];
     button4.innerHTML = questionOne[3];
 
+    // correct answer function
     button3.onclick = function() {
         if (true) {
             console.log("Correct!");
+            // will proceed to next question once button is clicked
             quiz2();
         }
         return false;
     };
 
+    // incorrect answer function(s)
     button1.onclick = function() {
         if (true) {
+            // when user clicks wrong answer, timer will subtract 10 from timeLeft value
             timeLeft = timeLeft - 10;
             console.log("Wrong!");
+            // will still proceed to next question once button is clicked
             quiz2();
         }
         return false;
@@ -81,7 +92,7 @@ var quiz1 = function() {
 }; 
 
 var quiz2 = function() {
-
+    // previous questions values are replaced once new function has loaded
     quizNum.innerHTML = "Question #2:";
     quizQuestion.innerHTML = "What is name of Wander's horse in Shadow of the Colossus?";
     button1.innerHTML = questionTwo[0];
@@ -225,12 +236,14 @@ var quiz5 = function() {
     button2.innerHTML = questionFive[1];
     button3.innerHTML = questionFive[2];
     button4.innerHTML = questionFive[3];
-
+    
+    // Since this is the final question, proceed to endGame function
     button1.onclick = function() {
         if (true) {
             console.log("Correct");
+            // stop timer once question is clicked
             clearInterval(timeLeft);
-            postHighScores();
+            endGame();
         }
         return false;
     }
@@ -238,8 +251,9 @@ var quiz5 = function() {
         if (true) {
             timeLeft = timeLeft - 10;
             console.log("Wrong!");
+            // will still stop timer after subtracting for incorrect answer
             clearInterval(timeLeft);
-            postHighScores();
+            endGame();
         }
         return false;
     }
@@ -249,7 +263,7 @@ var quiz5 = function() {
             timeLeft = timeLeft - 10;
             console.log("Wrong!");
             clearInterval(timeLeft);
-            postHighScores();
+            endGame();
         }
         return false;
     }
@@ -259,16 +273,22 @@ var quiz5 = function() {
             timeLeft = timeLeft - 10;
             console.log("Wrong!");
             clearInterval(timeLeft);
-            postHighScores();
+            endGame();
         }
         return false;
     }
 };
 
+var endGame = function() {
+    
+}
+
 var postHighScores = function () {
-    localStorage.setItem(timeLeft, JSON.stringify(timeLeft));
+    listEl.textContent = localStorage.setItem(timeLeft, JSON.stringify(timeLeft));
 };
+
 
 countdown();
 quiz1();
+endGame();
 postHighScores();
