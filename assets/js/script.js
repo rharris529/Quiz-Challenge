@@ -2,7 +2,7 @@ var start = document.getElementById("start-quiz");
 var quizNum = document.getElementById("question-number");
 var quizQuestion = document.getElementById("content");
 var quiztimer = document.getElementById("quiz-timer");
-var timeLeft = 30;
+var timeLeft = 50;
 
 var button1 = document.getElementById("answer1");
 var button2 = document.getElementById("answer2");
@@ -25,10 +25,13 @@ function countdown () {
             timeLeft--;
         } else if (timeLeft === -1) {
             // when quizStart function ends, user will be transported to highscores page
-            alert("Time's Up!");
-            clearInterval(timer);
+            clearInterval(timeLeft);
             postHighScores();
         }
+        if (quiz5 === true) {
+            postHighScores();
+        }
+        return false;
     }, 1000);      
 };
 
@@ -41,7 +44,6 @@ var quiz1 = function() {
     button3.innerHTML = questionOne[2];
     button4.innerHTML = questionOne[3];
 
-
     button3.onclick = function() {
         if (true) {
             console.log("Correct!");
@@ -49,6 +51,33 @@ var quiz1 = function() {
         }
         return false;
     };
+
+    button1.onclick = function() {
+        if (true) {
+            timeLeft = timeLeft - 10;
+            console.log("Wrong!");
+            quiz2();
+        }
+        return false;
+    }
+
+    button2.onclick = function() {
+        if (true) {
+            timeLeft = timeLeft - 10;
+            console.log("Wrong!");
+            quiz2();
+        }
+        return false;
+    }
+
+    button4.onclick = function() {
+        if (true) {
+            timeLeft = timeLeft - 10;
+            console.log("Wrong!");
+            quiz2();
+        }
+        return false;
+    }
 }; 
 
 var quiz2 = function() {
@@ -67,6 +96,33 @@ var quiz2 = function() {
         }
         return false;
     }
+
+    button1.onclick = function() {
+        if (true) {
+            timeLeft = timeLeft - 10;
+            console.log("Wrong!");
+            quiz3();
+        }
+        return false;
+    }
+
+    button3.onclick = function() {
+        if (true) {
+            timeLeft = timeLeft - 10;
+            console.log("Wrong!");
+            quiz3();
+        }
+        return false;
+    }
+
+    button4.onclick = function() {
+        if (true) {
+            timeLeft = timeLeft - 10;
+            console.log("Wrong!");
+            quiz3();
+        }
+        return false;
+    }
 };
 
 var quiz3 = function() {
@@ -81,6 +137,33 @@ var quiz3 = function() {
     button4.onclick = function() {
         if (true) {
             console.log("Correct!");
+            quiz4();
+        }
+        return false;
+    }
+
+    button1.onclick = function() {
+        if (true) {
+            timeLeft = timeLeft - 10;
+            console.log("Wrong!");
+            quiz4();
+        }
+        return false;
+    }
+
+    button2.onclick = function() {
+        if (true) {
+            timeLeft = timeLeft - 10;
+            console.log("Wrong!");
+            quiz4();
+        }
+        return false;
+    }
+
+    button3.onclick = function() {
+        if (true) {
+            timeLeft = timeLeft - 10;
+            console.log("Wrong!");
             quiz4();
         }
         return false;
@@ -105,10 +188,37 @@ var quiz4 = function() {
         return false;
     }
 
+    button1.onclick = function() {
+        if (true) {
+            timeLeft = timeLeft - 10;
+            console.log("Wrong!");
+            quiz5();
+        }
+        return false;
+    }
+
+    button3.onclick = function() {
+        if (true) {
+            timeLeft = timeLeft - 10;
+            console.log("Wrong!");
+            quiz5();
+        }
+        return false;
+    }
+
+    button4.onclick = function() {
+        if (true) {
+            timeLeft = timeLeft - 10;
+            console.log("Wrong!");
+            quiz5();
+        }
+        return false;
+    }
+
 };
 
 var quiz5 = function() {
-    
+
     quizNum.innerHTML = "Question #5:";
     quizQuestion.innerHTML = "In ET for the Atart 2600, what must ET collect in order to keep his energy up?";
     button1.innerHTML = questionFive[0];
@@ -119,11 +229,46 @@ var quiz5 = function() {
     button1.onclick = function() {
         if (true) {
             console.log("Correct");
-            clearInterval(timer);
+            clearInterval(timeLeft);
+            postHighScores();
+        }
+        return false;
+    }
+    button2.onclick = function() {
+        if (true) {
+            timeLeft = timeLeft - 10;
+            console.log("Wrong!");
+            clearInterval(timeLeft);
+            postHighScores();
+        }
+        return false;
+    }
+
+    button3.onclick = function() {
+        if (true) {
+            timeLeft = timeLeft - 10;
+            console.log("Wrong!");
+            clearInterval(timeLeft);
+            postHighScores();
+        }
+        return false;
+    }
+
+    button4.onclick = function() {
+        if (true) {
+            timeLeft = timeLeft - 10;
+            console.log("Wrong!");
+            clearInterval(timeLeft);
+            postHighScores();
         }
         return false;
     }
 };
 
+var postHighScores = function () {
+    localStorage.setItem(timeLeft, JSON.stringify(timeLeft));
+};
+
 countdown();
 quiz1();
+postHighScores();
