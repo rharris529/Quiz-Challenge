@@ -108,6 +108,7 @@ var quiz4 = function() {
 };
 
 var quiz5 = function() {
+    
     quizNum.innerHTML = "Question #5:";
     quizQuestion.innerHTML = "In ET for the Atart 2600, what must ET collect in order to keep his energy up?";
     button1.innerHTML = questionFive[0];
